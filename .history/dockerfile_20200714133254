@@ -1,0 +1,22 @@
+FROM python:3.8.4-alpine3.12
+
+MAINTAINER DaveT 
+# Required for python running in a docker container
+ENV PYTHONUNBUFERED 1
+
+COPY ./requirements.txt /requirements.txt
+
+RUN pip install -r /requirements.txt
+
+RUN mkdir /app
+WORKDIR /app
+COPY ./app /app
+
+# stop app running on the root account
+
+RUN adduser -D user 
+USER user
+
+
+
+
